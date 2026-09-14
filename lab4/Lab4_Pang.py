@@ -112,6 +112,11 @@ put the animals that were grabbed into new animals
 
 animals = ['lion', 'giraffe', 'gorilla', 'parrots', 'crocodile', 'deer', 'swan']
 newanimals = []
+lenanimals = len(animals)
+for i in animals:
+    if len(i) <= 6:
+        list.append(newanimals, i)
+print(newanimals)
 
 
 print('\n----- EXERCISE 2: FUNCTIONS ------')
@@ -120,5 +125,6 @@ grades = [65, 87, 95, 77, 35]
 
 def average(list):
     lengthlist = len(list)
+    total = 0
     for i in list:
-        sum = 
+        
