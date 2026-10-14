@@ -58,19 +58,3 @@ All 3 tests passed
 Issues: The only issue i really had was actually setting up monkeypatch correctly which led to some failures but otherwise there isnt any issues with testing game results
 
 '''
-'''
-
-Reflection:
-
-1. What was the most interesting part of the unit testing project, justify answer?
-The most interesting part of the unit test is learning about monkeypatch, although it wasnt taught in class learning about what it does made it interesting, it also seems like it has alot of use in a real dev environment for testing
-
-2. What was the most difficult part of the unit testing project, and how did you manage to overcome those difficulties?
-The most difficult part was learning different things pytest actually has, overcoming the difficulty was simply just searching up what the different syntax can do
-
-3. Did you use any AI tools or assistants to complete this lab? If so, briefly explain how you used them.
-Yes, i used it to help me learn about the different ways to use monkeypatch but other than that there was nothing.
-
-
-
-'''
