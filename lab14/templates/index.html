@@ -7,43 +7,50 @@
     <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
 </head>
 <body>
-    <h1 class = "title">Jiaxi Pang</h1>
+    <h1 class="title">Jiaxi Pang</h1>
     <h2> Create Item</h2>
-    <form id="itemform">
-        <div class = 'formsession'> 
-            <label> Name:
+    <form id="itemForm">
+        <div class="formsession">
+            <label>Name:
                 <input type="text" id="name" required>
             </label>
         </div>
-        <div class = 'formsession'>
+
+        <div class="formsession">
             <label>Price:
-                <input type="number" id="price" required>
+                <input type="text"  id="price" required>
             </label>
         </div>
-        <div class = 'formsession'>
-            <button type="submit">Submit</button>
-        </div>
-    </form>
-    <section class = "loaditems">
-    <h2>ALL ITEMS</h2>
-    <button onclick="loaditems()">LOAD ITEMS</button>
-    <ul id="itemslist"> 
 
-    </ul>
-    </section>
-<!-- TABLE TO UPDATE AN ITEM NAME AND PRICE -->
-    <section id="updatesection" style="display: none;">
+        <div class="formsession">
+            <button type="submit">SUBMIT</button>
+        </div>
+
+        <p id="response"></p>
+    </form>
+
+    <!-- LOADING ITEM-->
+      <section class="loaditems">
+        <hr>
+        <h2>ALL ITEMS</h2>
+        <button onclick="loaditems()">LOAD ITEMS</button>
+
+        <ul id="itemslist"> </ul>
+     </section>
+
+     <!-- TABLE TO UPDATE AN ITEM NAME AND PRICE -->
+     <section id="updatesection" style="display: none;">
         <h3>Update item</h3>
         <input type="hidden" id="updateID">
-        <label>Name: 
+        <label> Name: 
             <input type="text" id="updateName">
         </label>
-        <label>Price: 
+        <label> Price: 
             <input type="text" id="updatePrice">
         </label>
         <button onclick="updateItem()">SAVE UPDATE</button>
-    </section>
+     </section>
 
-   <script src="{{ url_for('static', filename='app_script.js')}}"></script>
+    <script src="{{url_for('static', filename = 'app_script.js')}}"></script>
 </body>
 </html>
