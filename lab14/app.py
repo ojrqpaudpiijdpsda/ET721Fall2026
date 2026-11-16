@@ -1,10 +1,15 @@
 from flask import Flask, request, jsonify, render_template 
+from flask import Flask, request, jsonify, render_template 
 
 app = Flask(__name__)
 
 # in-memory database (just dictionary)
+
+# in-memory database (just dictionary)
 items = {}
 
+
+# home route 
 
 # home route 
 @app.route('/')
@@ -13,31 +18,46 @@ def home():
 
 # CREATE an item
 @app.route('/items', methods = ["POST"])
+# CREATE an item
+@app.route('/items', methods = ["POST"])
 def create_item():
+    # request.get_json() method is used to read JSON data sent by the client
     # request.get_json() method is used to read JSON data sent by the client
     data = request.get_json()
 
     # generate a new unique id for the new item
+    # generate a new unique id for the new item
     item_id = str(len(items)+1)
+
+    # add the data collected for the item 
 
     # add the data collected for the item 
     items[item_id] = data
 
     return jsonify({"id": item_id, "item": data}), 201
 
+    return jsonify({"id": item_id, "item": data}), 201
+
+# READ all items
 # READ all items
 @app.route('/items', methods = ['GET'])
 def get_items():
     return jsonify(items)
 
+
 # READ, UPDATE, DELETE SINGLE ITEM
+@app.route('/items/<item_id>', methods = ['GET', 'PUT', 'DELETE'])
 @app.route('/items/<item_id>', methods = ['GET', 'PUT', 'DELETE'])
 def handle_item(item_id):
     item = items.get(item_id)
 
     # READ
+
+    # READ
     if request.method == 'GET':
         if not item:
+            return jsonify({'Error' : 'Item not found'}), 404
+
             return jsonify({'Error' : 'Item not found'}), 404
 
         return jsonify(item)
@@ -59,8 +79,48 @@ def handle_item(item_id):
         deleted_item = items.pop(item_id)
         return render_template('delete.html', item_id = item_id, deleted_item = deleted_item)
 
+
+    # UPDATE
+    elif request.method == "PUT":
+        if not item:
+            return render_template('error.html', message = "NOT FOUND", item = item), 404
+
+        data = request.get_json()
+        if not data:
+            return jsonify({'error' : 'Invalid input'}), 400
+
+        items[item_id] = data
+        return render_template('update.html', item_id = item_id, item = data)
+    
+    # DELETE
+    elif request.method == "DELETE":
+        deleted_item = items.pop(item_id)
+        return render_template('delete.html', item_id = item_id, deleted_item = deleted_item)
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
