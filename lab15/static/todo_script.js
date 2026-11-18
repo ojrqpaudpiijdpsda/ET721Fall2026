@@ -14,7 +14,7 @@ function loadTasks() {
             list.appendChild(li);
 
             const btn = document.createElement('button');
-            btn.innterHTML = "&#10060;";
+            btn.innerHTML = "&#10060;";
             btn.classList.add("btndeletetask");
             btn.onclick = () => {
                 fetch("/delete_task", {
