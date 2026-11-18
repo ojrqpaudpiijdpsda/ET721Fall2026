@@ -21,5 +21,47 @@ db = mysql.connector.connect(
 def index():
     return render_template('index.html')
 
+# -------------------------
+# Get All Tasks
+# -------------------------
+@app.route("/get_tasks", methods=["GET"])
+def get_tasks():
+    try:
+        with db.cursor(dictionary=True) as cursor: 
+            cursor.execute("SELECT * FROM tasks")
+            tasks = cursor.fetchall()
+        return jsonify(tasks)
+    except mysql.connector.Error as e:
+        return jsonify({"error": str(e)}), 500
+
+# -------------------------
+# Add New Task
+# -------------------------
+@app.route("/add_task", methods=["POST"])
+def add_task():
+    data = request.get_json()
+    task = data.get("task")
+    if task:
+        cursor = db.cursor()
+        cursor.execute( "INSERT INTO tasks (task) VALUES (%s)", (task,))
+        db.commit()
+        cursor.close()
+        return jsonify({"status": "success"})
+    return jsonify({"status": "error"})
+
+@app.route("/delete_task", methods=["POST"])
+def delete_task():
+    data = request.get_json()
+    task_id = data.get("id")
+    cursor = db.cursor()
+    cursor.execute(
+        "DELETE FROM tasks WHERE id = %s",
+        (task_id,)
+    )
+    db.commit()
+    cursor.close()
+    return jsonify({"status": "deleted"})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
